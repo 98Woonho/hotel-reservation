@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #eaecee;
+    color: #17202a;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: unset;
+    min-width: 1382px;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .content-container-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .content-container-wrapper > .content-container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+ol, ul {
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+}
+
+.spring {
+    flex: 1;
+}
+
+#header {
+    background-color: #F1E3C4;
+    height: 90px;
+}
+#header > .menu {
+    position: absolute;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    height: inherit;
+}
+
+#header > .menu > .find {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#header > .menu > .find > .link {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    margin-bottom: 0.875rem;
+
+}
+
+#header > .menu > .find > .link > .icon {
+    height: 1.25rem;
+    margin-right: 0.375rem;
+    margin-bottom: 0.2rem;
+}
+
+#header > .menu > .find > .link > .icon > .text {
+    white-space: nowrap;
+}
+
+
+#header > .menu > .subMenu {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#header > .menu > .subMenu > .userArea {
+    align-content: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 100%;
+
+    margin-top: 0.275rem;
+}
+
+#header > .menu > .subMenu > .userArea > .user:nth-child(2) > .link {
+    margin: 0 1.5rem;
+}
+
+#header > .menu > .subMenu > .userArea > .user:first-child > .link {
+    border-right: 0.0625rem solid #D2C4A5;
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+}
+
+#header > .menu > .subMenu > .userArea > .user > .link > .text {
+    color: #706958;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+#header > .menu > .subMenu > .hotelArea {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    height: 100%;
+}
+
+#header > .menu > .subMenu > .hotelArea > .hotel {
+    margin-left: 1.25rem;
+    margin-bottom: 0.625rem;
+    border-bottom: 0.25rem solid transparent;
+    box-sizing: border-box;
+    transition-duration: 250ms;
+    transition-property: border-bottom-color;
+    transition-timing-function: ease;
+}
+
+#header > .menu > .subMenu > .hotelArea > .hotel:hover {
+    border-bottom: 0.25rem solid #4D473C;
+}
+
+#header > .menu > .subMenu > .hotelArea > .hotel > .link {
+    margin: 0 0.5rem;
+    white-space: nowrap;
+}
+
+
+#header > .logo {
+    width: 477px;
+    height: inherit;
+    margin: 0 auto;
+}
+
+#header > .logo > a {
+    display: inline-block;
+    width: inherit;
+    height: inherit;
+}
+
+#header > .logo > .link {
+    position: relative;
+}
+
+#header > .logo > .link > .title-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#header .spring {
+    flex: 1;
+}
+
+#header > .menu > .find > .link > .text,
+#header > .menu > .subMenu > .hotelArea > .hotel > .link {
+    color: #4D473C;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+#main {
+    flex: 1;
+}
+
+#footer {
+    background-color: #F1E3C4;
+    height: 7.5rem;
+}
+
+#footer > .content-container > .content-container-right > .icon-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#footer > .content-container > .content-container-right > .terms-policy-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 100%;
+    margin-top: 0.35rem;
+}
+
+#footer > .content-container > .content-container-right > .terms-policy-container > .privacy-policy > .link {
+    border-right: 0.0625rem solid #D2C4A5;
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+}
+
+#footer > .content-container > .content-container-right > .terms-policy-container > .privacy-policy > .link >  .text {
+    color: #706958;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+#footer > .content-container > .content-container-right > .terms-policy-container > .terms > .link {
+    margin-left: 1.5rem;
+}
+
+#footer > .content-container > .content-container-right > .terms-policy-container > .terms > .link >  .text {
+    color: #706958;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+
+#footer > .content-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#footer > .content-container > .content-container-left > .copyright {
+    margin: unset;
+}
