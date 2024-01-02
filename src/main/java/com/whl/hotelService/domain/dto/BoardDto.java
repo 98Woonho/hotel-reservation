@@ -5,36 +5,34 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+//DTO(Data Transfer Object) 파라미터들을 전송하기 위한 Dto
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Builder
+@NoArgsConstructor // 기본생성자
+@AllArgsConstructor // 모든필드를 매개변수로 하는 생성자
 public class BoardDto {
     private Long id;
-    private String writer;
-    private String title;
-    private String content;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private String boardWriter; //작성자
+    private String boardPassword; //비밀번호
+    private String boardTitle; //제목
+    private String boardContents; //내용
+    private int boardHits; //조회수
+    private LocalDateTime boardCreatedTime; // 작성시간
+    private LocalDateTime boardUpdatedTime; // 수정시간
 
-    //BoardDTO를 Entity로 변환하는 함수
-    public BoardEntity toEntity(){
-        BoardEntity boardEntity = BoardEntity.builder()
-                .id(id)
-                .writer(writer)
-                .title(title)
-                .content(content)
-                .build();
-        return boardEntity;
-    }
 
-    @Builder
-    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.id = id;
-        this.writer = writer;
-        this.title = title;
-        this.content = content;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+    public static BoardDto EntityToDto(BoardEntity boardEntity){
+        BoardDto boardDto = new BoardDto();
+        boardDto.setId(boardEntity.getId());
+        boardDto.setBoardTitle(boardEntity.getBoardTitle());
+        boardDto.setBoardWriter(boardEntity.getBoardWriter());
+        boardDto.setBoardPassword(boardEntity.getBoardPassword());
+        boardDto.setBoardContents(boardEntity.getBoardContents());
+        boardDto.setBoardHits(boardEntity.getBoardHits());
+        boardDto.setBoardCreatedTime(boardEntity.getCreatedTime());
+        boardDto.setBoardUpdatedTime(boardEntity.getUpdatedTime());
+        return boardDto;
     }
 }

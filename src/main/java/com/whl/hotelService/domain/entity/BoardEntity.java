@@ -1,5 +1,6 @@
 package com.whl.hotelService.domain.entity;
 
+import com.whl.hotelService.domain.dto.BoardDto;
 import jakarta.persistence.*;
 import jdk.jfr.Unsigned;
 import lombok.*;
@@ -8,28 +9,31 @@ import java.util.Date;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "board")
-public class BoardEntity extends TimeEntity{
-    @Id
-    @Unsigned
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Table(name = "board_table")
+public class BoardEntity extends DateEntity {
+    @Id //PrimaryKey 지정
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
-    @Column(length = 10, nullable = false)
-    private String writer;
+    @Column(length = 20, nullable = false) // 길이가 20이고 not null
+    private String boardWriter;
+    @Column(length = 20, nullable = false)
+    private String boardPassword;
+    @Column(length = 20, nullable = false)
+    private String boardTitle;
+    @Column(length = 500, nullable = false)
+    private String boardContents;
+    private int boardHits;
 
-    @Column(length = 100, nullable = false)
-    private String title;
-
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;
-
-    @Builder
-    public BoardEntity(Long id, String title, String content, String writer) {
-        this.id = id;
-        this.writer = writer;
-        this.title = title;
-        this.content = content;
+    public static BoardEntity DtoToEntity(BoardDto boardDto){ //DTO에 담긴 값들을 Entity 로 옮기는 코드 즉 DTO를 Entity로 변환하는 코드
+        BoardEntity boardEntity = new BoardEntity();
+        boardEntity.setBoardWriter(boardDto.getBoardWriter());
+        boardEntity.setBoardPassword(boardDto.getBoardPassword());
+        boardEntity.setBoardTitle(boardDto.getBoardTitle());
+        boardEntity.setBoardContents(boardDto.getBoardContents());
+        boardEntity.setBoardHits(0);
+        return boardEntity;
     }
 }
