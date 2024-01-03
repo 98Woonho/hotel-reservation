@@ -1,6 +1,6 @@
-package com.whl.hotelService.domain.dto;
+package com.whl.hotelService.boardDomain.dto;
 
-import com.whl.hotelService.domain.entity.BoardEntity;
+import com.whl.hotelService.boardDomain.entity.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;

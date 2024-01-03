@@ -1,7 +1,7 @@
 package com.whl.hotelService.controller;
 
-import com.whl.hotelService.domain.dto.BoardDto;
-import com.whl.hotelService.domain.service.BoardService;
+import com.whl.hotelService.boardDomain.dto.BoardDto;
+import com.whl.hotelService.boardDomain.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,5 +36,12 @@ public class BoardController {
         List<BoardDto> boardDtoList = boardService.findAll();
         model.addAttribute("boardList", boardDtoList);
         return "board/list";
+    }
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id, Model model) throws Exception {
+        boardService.updateHits(id); // 조회수를 하나 올리고 게시글 데이터를 가져와서 detail.html 출력
+        BoardDto boardDto = boardService.findById(id);
+        model.addAttribute("board", boardDto);
+        return "board/detail";
     }
 }

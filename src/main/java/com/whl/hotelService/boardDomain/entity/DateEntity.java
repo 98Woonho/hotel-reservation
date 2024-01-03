@@ -1,4 +1,4 @@
-package com.whl.hotelService.domain.entity;
+package com.whl.hotelService.boardDomain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

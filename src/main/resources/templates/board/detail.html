@@ -2,30 +2,52 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>detail</title>
+    <link rel="stylesheet" th:href="@{/board/resources/stylesheets/detail.css}">
+    <script defer th:src="@{/board/resources/scripts/detail.js}"></script>
 </head>
 <body>
-<h2 th:text="${boardDto.title}"></h2>
-<p th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]]</p>
-
-<p th:text="${boardDto.content}"></p>
-
-<!-- 수정/삭제 -->
-<div>
-    <a th:href="@{'/board/post/edit/' + ${boardDto.id}}">
-        <button>수정</button>
-    </a>
-
-    <form id="delete-form" th:action="@{'/board/post/' + ${boardDto.id}}" method="post">
-        <input type="hidden" name="_method" value="delete"/>
-        <button id="delete-btn">삭제</button>
-    </form>
-</div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var boardDto = /*[[${boardDto}]]*/ "";
-    /*]]>*/
-</script>
+<table>
+    <tr>
+        <th>id</th>
+        <td th:text="${board.id}"></td>
+    </tr>
+    <tr>
+        <th>제목</th>
+        <td th:text="${board.boardTitle}"></td>
+    </tr>
+    <tr>
+        <th>작성자</th>
+        <td th:text="${board.boardWriter}"></td>
+    </tr>
+    <tr>
+        <th>날짜</th>
+        <td th:text="${board.boardCreatedTime}"></td>
+    </tr>
+    <tr>
+        <th>조회수</th>
+        <td th:text="${board.boardHits}"></td>
+    </tr>
+    <tr>
+        <th>내용</th>
+        <td th:text="${board.boardContents}"></td>
+    </tr>
+</table>
+<button onclick="listReq()">목록</button>
+<button onclick="updatrReq()">수정</button>
+<button onclick="deleteReq()">삭제</button>
 </body>
+<script th:inline="javascript">
+    const listReq = () => {
+        location.href = "/board/list"
+    }
+    const updatrReq =() =>{
+        const id = [[${board.id}]]; // 모델로 받아온 id를 사용 하기 위해서는 <script th:inline="javascript"> 필요
+        location.href = "/board/update/" + id;
+    }
+    const deleteReq = () => {
+        const id = [[${board.id}]];
+        location.href = "/board/delete/" + id;
+    }
+</script>
 </html>

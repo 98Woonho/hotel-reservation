@@ -1,11 +1,8 @@
-package com.whl.hotelService.domain.entity;
+package com.whl.hotelService.boardDomain.entity;
 
-import com.whl.hotelService.domain.dto.BoardDto;
+import com.whl.hotelService.boardDomain.dto.BoardDto;
 import jakarta.persistence.*;
-import jdk.jfr.Unsigned;
 import lombok.*;
-
-import java.util.Date;
 
 
 @Getter

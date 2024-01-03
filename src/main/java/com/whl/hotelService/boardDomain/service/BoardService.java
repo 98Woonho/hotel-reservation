@@ -1,12 +1,11 @@
-package com.whl.hotelService.domain.service;
+package com.whl.hotelService.boardDomain.service;
 
-import com.whl.hotelService.domain.dto.BoardDto;
-import com.whl.hotelService.domain.entity.BoardEntity;
-import com.whl.hotelService.domain.repository.BoardRepositoy;
-import jakarta.transaction.Transactional;
-import org.jetbrains.annotations.NotNull;
+import com.whl.hotelService.boardDomain.dto.BoardDto;
+import com.whl.hotelService.boardDomain.entity.BoardEntity;
+import com.whl.hotelService.boardDomain.repository.BoardRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +31,22 @@ public class BoardService {
             boardDtoList.add(BoardDto.EntityToDto(boardEntity));
         }
         return boardDtoList;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void updateHits(Long id) throws Exception {
+        boardRepositoy.updateHits(id);
+    }
+
+    public BoardDto findById(Long id) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepositoy.findById(id); //Id 로 조회를 해서
+        if (optionalBoardEntity.isPresent()){ //만약 있으면
+            BoardEntity boardEntity = optionalBoardEntity.get(); //반환하고
+            BoardDto boardDto = BoardDto.EntityToDto(boardEntity); //엔티티를 Dto로 변환해서 컨트롤러에 리턴
+            return boardDto;
+        } else {
+            return null;
+        }
     }
 }
 

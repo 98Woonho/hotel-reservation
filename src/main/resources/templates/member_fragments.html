@@ -16,17 +16,18 @@
     <!--  BS CDN  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </th:block>
 
 <header id="header" class="content-container-wrapper" th:fragment="header">
     <h1 class="item logo">
-        <a th:href="@{/home/homepage}" class="link">
+        <a href="#" class="link">
             <img th:src="@{/resources/images/ITHOTEL.header.png}" class="title-logo">
         </a>
     </h1>
     <div class="content-container menu">
         <span class="item find">
-            <a th:href="@{/hotel/find}" class="link">
+            <a href="#" class="link">
                 <img class="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADrElEQVR4nO1ZO2hVQRBdSYxBCz8EFfwUok2UIAQxyUyyGt+dveTu5ql4LUQbgwqmSURbC03lr7Cw1koxRSwUYyCWYixSKEJsLPxAClEUFWL8MS+/vffF5CX3857wDtwuObNndmZ2Zp4QZZRRRhmFwHMad2iCs0ZBnyF4ZQg/GoV/jIKvhvCdVjBoCC5pp4mklJWilCClrNQKj2mC4YlDF/ZphaNGQY/WsqbYGoR2UWqClwsRkPcRfjYEXb7vV6QuwPf9ipw3CX/lHw7GOYS0wivawW5NcEQr6NSEF4zCOzPhlndDj9va5PoURdRWacK7+QeB18aFDqKGNXP9/8n6+qXtCjOGoH82Di/Tsi0FEX5FWIQm/D4RGrVVC+UzTnOrJhwJiXnjunJjMgqmDCvoCYXDe+027orCmZVylVbwMOgcGJZSVovkEnsmJ1hElpo3xZhzvcEiAFdFIiXWqk4cTlFvIgzHcVYESziMGxfr4rQh+J0IeatLJABDDVs14Zglpi9WA7anuLIsJrELtqXguuW0394+3BJb2xG4DRc6RII44DSu1Qp/WGF8PhZirZrP2XHrebg6FuI5beKA9fI/iYeU4J4VVoOxkM5nU0Gn7TzXdZdFJw0+WJdFCjAuNNjhzOEdnZSbuqkbcbBbpACdgc2hKulEJyX4OZPoeFSkAA4lE2yD9kcmNYTfpgldPB3LSeez2bp7XSC0FOyJTkrw1qogF0UKaHOadoZGg+2RSXlOsJq52yIFtLvoBx7FOEo+z9hW+f2U5Ks+bVPhLct5z2Mh5UWBfc08FInkdwAfYu+CJ4lHLeJ+kSA8whMBxznNLYkNVDzZiQSgdf1ynnOsJB+K2YCsCTyMhCM82SXQmtwIVauDcdsQ/KqHlgWP4lyytRMcD43RA0KIJSKRxYNViic91suTXVRureCU3brzysjzGjaIpMB7p9zaJ7Qo4Mlu8TkRDqfc9yKJ0A2A9068sgn1QmM82fFQVAgHhyRXp2Bi520gnyUuhrcns+16OTw4tnObRdXUyH/HD2iud3Kxzig4rBXeDLwTVjjxTaQuRkpZbRRcy207/uXVQj+Cfs4JPjQfPnUxjElP93FPtHARMDRZYqerU1HFMHjbwYsCnrHnuiXunbjtmOvFLroYezDi8ZT7Ms/BQ+3UtJdb8YV0sdlSERMH/ExmpVbwNFzu59v4lyT8spgSRXb2nHkg/kdkQ2I04RfxvyLLPwwR3OexWys8U+zzlFFGGaJ4+As+UAMhsdEasAAAAABJRU5ErkJggg==">
                 <span class="text">호텔 찾기</span>
             </a>
@@ -35,13 +36,13 @@
         <div class="content-subContainer subMenu">
             <ul class="content-container userArea">
                 <li class="item user">
-                    <a href="/user/login" class="link">
-                        <span class="text">로그인</span>
+                    <a href="/logout" class="link">
+                        <span class="text">로그아웃</span>
                     </a>
                 </li>
                 <li class="item user">
-                    <a href="/user/join" class="link">
-                        <span class="text">회원가입</span>
+                    <a href="#" class="link">
+                        <span class="text">마이페이지</span>
                     </a>
                 </li>
             </ul>
@@ -57,26 +58,10 @@
     </div>
 </header>
 
-<div id="findTop" th:fragment="findTop">
-    <div class="title-container">
-        <h1 class="title">호텔 지점</h1>
-    </div>
-    <div class="link-container">
-        <a th:href="@{/hotel/find}" class="link">
-            <img class="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA50lEQVR4nGNgGAWjYDABH3ebDh83m1Uw7Otu609XB/i625zxdbf5D8duNuXI8mnGxqw+bjZ1Pu42M8nBvm420/1cbe3IdoCfq405ijwZ2MfdZh/ZDqivZ2DydbPJBUcVOdjNps3Pw84QpwN83GyqkYPM293WnbjIGwXDBXh7W0h7O9sowbC/vb0AXR3gSyAXgEBoqBabt7eNIDk41MWFnyIHeHlZyvu4W3+gqCxws5lOqQPeU1YQWU8bvFHgPdCJcBQMOPAZ6MrIlw7VsY+7rdHQbZCkUaFJ5u1uZTt4G6WjYBQwDAAAADi/cBM8xa2lAAAAAElFTkSuQmCC">
-            <span class="text">List</span>
-        </a>
-        <a th:href="@{/hotel/findMap}" class="link">
-            <img class="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACS0lEQVR4nL1Xz2vUUBB++JOCUkT8UT2oBw/Wg+Iiu5uZNKDJTEjeS7vI+xf05kFPBWHvevSsHvSkeFIR9SIUFAQvXi2oiAhFRVTsrcqrbBfbfa+bl2w/GAjZnfm+TL5MJkJ4QEfRjiLBZsFBsRwJNs05MWrkHLIifKQYFhXjn/8DFiXBQ0WQ1E6szjT3KcYna0kHh2R43Enae2shL1KcVIwfhiVfCcL3WTx1rBL5zNnTuyXhfGnyXicI3qUp7vEWIAnv+5L3ReBdP3IO2opxqaqA5RoptDyuHm6tc2U/JONTSfhMMvx0i4Cbpci11psl4xdHwXvGH73/m2Nzzm5IWOh2xaahBeR566Cj2OvzjcbW1TlRFG1RhK9seR0OJ4YXQNiwFcpT6NjyJIXnrHmEjXoEEJyw5WVJcNI+nMJTQwtQSXjEfv/DaXsHcMaWl2XtQ+VMSPjb4v6X5vfVOcZkinDOYtpfpUxooAhfOCbcbR3H4yuC43hcMd5xGPe5KAvFMOt8tgm/SYYHJsyxc2YwXvIRcLyGKfjPuPHUUeEDyfi2KrkkeONFbqAILlcWwHBB+KIogp2S4bu3AIIFrVtj3gIMFOM1//ZjV1RFh8OJ9d92A+NrnuMuUQckw5Xy9x4virqgdWvM7HglWj+v9eQ2USek40235rnnkMUooFxLR7/1N0ZC3vs+cG1KkvFTbcazoeAwtyyrS3kaZGIjIBmvDxg6V8VGIU3T7WYv6JPj3KA9caTIsmi/IvioCD4XcXBgQ8l7mObosIkqRf4CDln1TjWH+0cAAAAASUVORK5CYII=">
-            <span class="text">Map</span>
-        </a>
-    </div>
-</div>
-
 <footer id="footer" class="content-container-wrapper" th:fragment="footer">
     <div class="content-container">
         <div class="content-container-left">
-            <a th:href="@{/home/homepage}" class="link">
+            <a href="#" class="link">
                 <img th:src="@{/resources/images/ITHOTEL.header.png}" class="title-logo">
             </a>
             <p class="copyright">Copyright ⓒ 2023 ITHOTEL Inc.</p>
