@@ -1,0 +1,17 @@
+#mainForm {
+    width: 400px;
+    margin: 0 auto;
+}
+header{
+    margin-bottom: 100px;
+}
+.button{
+    display: flex;
+    justify-content: center;
+}
+.btn{
+    width: 400px;
+}
+.form-label{
+    margin: 6px 0 0 0;
+}

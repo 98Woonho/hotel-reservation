@@ -22,17 +22,26 @@ public class BoardDto {
     private LocalDateTime boardCreatedTime; // 작성시간
     private LocalDateTime boardUpdatedTime; // 수정시간
 
+    public BoardDto(Long id, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
+        this.id = id;
+        this.boardWriter = boardWriter;
+        this.boardTitle = boardTitle;
+        this.boardHits = boardHits;
+        this.boardCreatedTime = boardCreatedTime;
+    }
 
-    public static BoardDto EntityToDto(BoardEntity boardEntity){
-        BoardDto boardDto = new BoardDto();
-        boardDto.setId(boardEntity.getId());
-        boardDto.setBoardTitle(boardEntity.getBoardTitle());
-        boardDto.setBoardWriter(boardEntity.getBoardWriter());
-        boardDto.setBoardPassword(boardEntity.getBoardPassword());
-        boardDto.setBoardContents(boardEntity.getBoardContents());
-        boardDto.setBoardHits(boardEntity.getBoardHits());
-        boardDto.setBoardCreatedTime(boardEntity.getCreatedTime());
-        boardDto.setBoardUpdatedTime(boardEntity.getUpdatedTime());
+    public static BoardDto EntityToDto(BoardEntity boardEntity) { //빌더 패턴 사용
+        BoardDto boardDto = BoardDto.builder()
+                .id(boardEntity.getId())
+                .boardTitle(boardEntity.getBoardTitle())
+                .boardContents(boardEntity.getBoardContents())
+                .boardHits(boardEntity.getBoardHits())
+                .boardCreatedTime(boardEntity.getCreatedTime())
+                .boardPassword(boardEntity.getBoardPassword())
+                .boardWriter(boardEntity.getBoardWriter())
+                .boardUpdatedTime(boardEntity.getUpdatedTime())
+                .build();
         return boardDto;
     }
+
 }

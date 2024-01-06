@@ -4,6 +4,10 @@ import com.whl.hotelService.boardDomain.dto.BoardDto;
 import com.whl.hotelService.boardDomain.entity.BoardEntity;
 import com.whl.hotelService.boardDomain.repository.BoardRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,15 +27,18 @@ public class BoardService {
         boardRepositoy.save(boardEntity);
     }
 
-    public List<BoardDto> findAll() {
+    public Page<BoardDto> findAll(Pageable pageable) {
         // boardRepositoy로부터 Entity로 넘어온 객체를 Dto로 담아서 컨트롤러에 전달해야함.
-        List<BoardEntity> boardEntityList = boardRepositoy.findAll();
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        for (BoardEntity boardEntity : boardEntityList){
-            boardDtoList.add(BoardDto.EntityToDto(boardEntity));
-        }
-        return boardDtoList;
+        Page<BoardEntity> boardEntities = boardRepositoy.findAll(pageable);
+        Page<BoardDto> boardDtos = boardEntities.map(board -> new BoardDto(board.getId(),
+                board.getBoardWriter(),
+                board.getBoardTitle(),
+                board.getBoardHits(),
+                board.getCreatedTime())); //Entity를 DTO로 변환 시키는 작업
+        return boardDtos;
     }
+//    public Page<BoardDto> findAll(PageRequest of) {
+//    }
 
     @Transactional(rollbackFor = Exception.class)
     public void updateHits(Long id) throws Exception {
@@ -48,5 +55,43 @@ public class BoardService {
             return null;
         }
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public BoardDto update(BoardDto boardDto) throws Exception{
+        BoardEntity boardEntity = BoardEntity.DtoToUpdateEntity(boardDto);
+        boardRepositoy.save(boardEntity);
+        return findById(boardDto.getId());
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Long id) throws Exception{
+        boardRepositoy.deleteById(id);
+    }
+
+//    public Page<BoardDto> paging(Pageable pageable) {
+//        int page = pageable.getPageNumber() -1; // DB로 요청한 페이지 번호
+//        int pageLimit = 10; //한 페이지에 보여줄 글 갯수
+////        Sort.by(Sort.Direction.DESC, "id" 정렬 기준은 id 기준으로 내림차순 정렬
+//        Page<BoardEntity> boardEntities =
+//                boardRepositoy.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+//
+//        System.out.println("boardEntities.getContent()" + boardEntities.getContent()); // 요청 페이지에 해당하는글
+//        System.out.println("boardEntities.getTotalElements()" + boardEntities.getTotalElements()); // 전체 글 갯수
+//        System.out.println("boardEntities.getNumber()" + boardEntities.getNumber()); // DB로 요청한 페이지 번호
+//        System.out.println("boardEntities.getTotalPages()" + boardEntities.getTotalPages()); // 전체 페이지 갯수
+//        System.out.println("boardEntities.getSize()" + boardEntities.getSize()); // 한 페이지에 보여줄 글 갯수
+//        System.out.println("boardEntities.hasPrevious()" + boardEntities.hasPrevious()); // 이전 페이지 존재 여부
+//        System.out.println("boardEntities.isFirst()" + boardEntities.isFirst()); // 첫 페이지 여부
+//        System.out.println("boardEntities.isLast()" + boardEntities.isLast()); // 마지막 페이지 여부
+//
+//        //목록 : id, writer, title, hits, createdTime
+//        Page<BoardDto> boardDtos = boardEntities.map(board -> new BoardDto(board.getId(),
+//                board.getBoardWriter(),
+//                board.getBoardTitle(),
+//                board.getBoardHits(),
+//                board.getCreatedTime())); //Entity를 DTO로 변환 시키는 작업
+//        return boardDtos;
+//    }
+
+
 }
 

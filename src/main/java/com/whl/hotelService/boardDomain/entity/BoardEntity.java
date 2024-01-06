@@ -7,7 +7,9 @@ import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "board_table")
 public class BoardEntity extends DateEntity {
@@ -25,12 +27,27 @@ public class BoardEntity extends DateEntity {
     private int boardHits;
 
     public static BoardEntity DtoToEntity(BoardDto boardDto){ //DTO에 담긴 값들을 Entity 로 옮기는 코드 즉 DTO를 Entity로 변환하는 코드
-        BoardEntity boardEntity = new BoardEntity();
-        boardEntity.setBoardWriter(boardDto.getBoardWriter());
-        boardEntity.setBoardPassword(boardDto.getBoardPassword());
-        boardEntity.setBoardTitle(boardDto.getBoardTitle());
-        boardEntity.setBoardContents(boardDto.getBoardContents());
-        boardEntity.setBoardHits(0);
+        BoardEntity boardEntity = BoardEntity.builder()
+                .boardWriter(boardDto.getBoardWriter())
+                .boardPassword(boardDto.getBoardPassword())
+                .boardTitle(boardDto.getBoardTitle())
+                .boardContents(boardDto.getBoardContents())
+                .boardHits(0)
+                .build();
         return boardEntity;
     }
+
+    public static BoardEntity DtoToUpdateEntity(BoardDto boardDto) {
+        BoardEntity boardEntity = BoardEntity.builder()
+                .id(boardDto.getId())
+                .boardWriter(boardDto.getBoardWriter())
+                .boardPassword(boardDto.getBoardPassword())
+                .boardTitle(boardDto.getBoardTitle())
+                .boardContents(boardDto.getBoardContents())
+                .boardHits(boardDto.getBoardHits())
+                .build();
+        return boardEntity;
+    }
+
+
 }
