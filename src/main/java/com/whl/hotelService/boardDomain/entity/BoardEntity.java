@@ -4,6 +4,9 @@ import com.whl.hotelService.boardDomain.dto.BoardDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -25,6 +28,8 @@ public class BoardEntity extends DateEntity {
     @Column(length = 500, nullable = false)
     private String boardContents;
     private int boardHits;
+    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> commentEntitiyList = new ArrayList<>();
 
     public static BoardEntity DtoToEntity(BoardDto boardDto){ //DTO에 담긴 값들을 Entity 로 옮기는 코드 즉 DTO를 Entity로 변환하는 코드
         BoardEntity boardEntity = BoardEntity.builder()
