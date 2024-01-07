@@ -5,14 +5,10 @@ import com.whl.hotelService.boardDomain.entity.BoardEntity;
 import com.whl.hotelService.boardDomain.repository.BoardRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 // DTO -> Entity변환 작업은 (Entity class)컨트롤러가 서비스로 데이터를 넘겨줄 땐 DTO 객체를 반환해야함 반대로 서비스에서 컨트롤러에 데이터를 넘겨줄 땐 DTO 객체를 반환
 // Entity -> DTO변환 작업은 (DTO class)서비스가 레파지토리로 데이터를 넘겨줄 땐 Entity 객체를 반환해야함 반대로 레파지토리에서 서비스로 데이터를 넘겨줄때도 Enitiy 객체를 반환
@@ -21,10 +17,24 @@ public class BoardService {
     @Autowired
     private BoardRepositoy boardRepositoy;
 
-    public void save(BoardDto boardDto) {
+    @Transactional(rollbackFor = Exception.class)
+    public BoardEntity save(BoardDto boardDto) throws Exception{
         // Contoller에서 받은 Dto객체를 엔티티로 변환해서 boardRepositoydp 저장해야함
         BoardEntity boardEntity = BoardEntity.DtoToEntity(boardDto);
-        boardRepositoy.save(boardEntity);
+        if (boardDto.getBoardWriter() == null ||
+            boardDto.getBoardPassword() == null ||
+            boardDto.getBoardTitle() == null ||
+            boardDto.getBoardContents() == null){
+            System.out.println("SAVE!!!!!!!!!!!!!!null!!!!!!!!!!!");
+            return null;
+        }else {
+            System.out.println("boardDto.getBoardWriter() : " + boardDto.getBoardWriter() );
+            System.out.println("boardDto.getBoardPassword() : " + boardDto.getBoardPassword() );
+            System.out.println("boardDto.getBoardTitle() : " + boardDto.getBoardTitle() );
+            System.out.println("boardDto.getBoardContents() : " + boardDto.getBoardContents() );
+            System.out.println("SAVE!!!!!!!!!!!!!!!!!!!!!!");
+            return boardRepositoy.save(boardEntity);
+        }
     }
 
     public Page<BoardDto> findAll(Pageable pageable) {
@@ -37,8 +47,16 @@ public class BoardService {
                 board.getCreatedTime())); //Entity를 DTO로 변환 시키는 작업
         return boardDtos;
     }
-//    public Page<BoardDto> findAll(PageRequest of) {
-//    }
+
+    public Page<BoardDto> findByBoardTitleContainingOrBoardWriterContaining(String boardTitle, String boardWriter, Pageable pageable){
+        Page<BoardEntity> boardEntities = boardRepositoy.findByBoardTitleContainingOrBoardWriterContaining(boardTitle, boardWriter,  pageable);
+        Page<BoardDto> boardDtos = boardEntities.map(board -> new BoardDto(board.getId(),
+                board.getBoardWriter(),
+                board.getBoardTitle(),
+                board.getBoardHits(),
+                board.getCreatedTime()));
+        return boardDtos;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public void updateHits(Long id) throws Exception {

@@ -12,19 +12,19 @@
 <form id="mainForm" action="/board/save" method="post">
     <div>
         <label class="form-label fw-bold fs-5">작성자</label>
-        <input class="form-control" type="text" name="boardWriter">
+        <input class="form-control" type="text" name="boardWriter" required>
     </div>
     <div>
         <label class="form-label fw-bold fs-5">비밀번호</label>
-        <input class="form-control" type="text" name="boardPassword">
+        <input class="form-control" type="text" name="boardPassword" required>
     </div>
     <div>
         <label class="form-label fw-bold fs-5">제목</label>
-        <input class="form-control" type="text" name="boardTitle">
+        <input class="form-control" type="text" name="boardTitle" required>
     </div>
     <div class="mb-3">
         <label class="form-label fw-bold fs-5">내용</label>
-        <textarea class="form-control" name="boardContents" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="boardContents" cols="30" rows="10" required></textarea>
     </div>
     <span class="mb-3">
         <input class="form-control write" type="submit" value="글작성">

@@ -2,6 +2,7 @@ package com.whl.hotelService.controller;
 
 import com.whl.hotelService.boardDomain.dto.BoardDto;
 import com.whl.hotelService.boardDomain.service.BoardService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,26 +26,31 @@ public class BoardController {
         return "board/save";
     }
     @PostMapping("/save") //글작성
-    public String save(BoardDto boardDto){
+    public String save(@Valid BoardDto boardDto) throws Exception{
         System.out.println("boardDTO = " +boardDto);
         boardService.save(boardDto);
         return "redirect:/board/list";
     }
     @GetMapping("/list")  // 목록화면
-    public String findAll(@PageableDefault(page = 1, size = 5) Pageable pageable, Model model){
-        // DB에서 전체 게시글 데이터를 가져와서 list.html에 보여준다.
-        Page<BoardDto> boardDtos = boardService.findAll(pageable);
-        int startPage = Math.max(1, boardDtos.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(boardDtos.getTotalPages(), boardDtos.getPageable().getPageNumber() + 4);
-//        int blockLimit = 5;
-//        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit)))-1) * blockLimit + 1;
-//        int endPage = ((startPage + blockLimit - 1) < boardDtos.getTotalPages()) ? startPage + blockLimit -1 : boardDtos.getTotalPages();
+    public String findAll(@PageableDefault(page = 0, size = 10) Pageable pageable, String searchText, Model model){
+
+        Page<BoardDto> boardDtos = null;
+        if (searchText == null){
+            boardDtos = boardService.findAll(pageable);
+        }else {
+            boardDtos = boardService.findByBoardTitleContainingOrBoardWriterContaining(searchText, searchText, pageable);
+        }
+
+        int startPage = Math.max(1, boardDtos.getPageable().getPageNumber() - 5);
+        int endPage = Math.min(boardDtos.getTotalPages(), boardDtos.getPageable().getPageNumber() + 5);
 
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("boardList", boardDtos);
         return "board/list";
     }
+
+
     @GetMapping("/{id}") // 조회수 올리기
     public String findById(@PathVariable Long id, Model model) throws Exception {
         boardService.updateHits(id); // 조회수를 하나 올리고 게시글 데이터를 가져와서 detail.html 출력
@@ -70,18 +76,5 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-    //board/paging?page=1
-//    @GetMapping("/list/paging")
-//    public String paging(@PageableDefault(page = 1)Pageable pageable, Model model){
-//        Page<BoardDto> boardList = boardService.paging(pageable);
-//        int blockLimit = 5;
-//        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit)))-1) * blockLimit + 1;
-//        int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit -1 : boardList.getTotalPages();
-//
-//        model.addAttribute("boardList", boardList);
-//        model.addAttribute("startPage", startPage);
-//        model.addAttribute("endPage", endPage);
-//        return "board/paging";
-//    }
 
 }
